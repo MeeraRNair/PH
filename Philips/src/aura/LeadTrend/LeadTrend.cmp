@@ -1,0 +1,46 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes"  access="global" controller="TrendLeadController">
+   
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="TrendList" type="OpportunityReportResponse[]" />
+    <aura:attribute name="showChart" type="boolean" default="false" />
+    <aura:attribute name="searchCriteria" type="String" default="All" />
+    <aura:attribute name="trendType" type="String" default="Product" />
+        
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:SalesAppHeader pgHeader="Lead Trend" icon="utility:trending" showButton="true" Button1="Back"/>
+    
+        <div class="slds-tabs--default ">
+            <ul class="slds-tabs--default__nav" role="tablist">                 
+                <!-- v2.0: Changed tabs -->
+                <li aura:id="Tab1" class="slds-tabs--default__item slds-text-title--caps slds-active" title="Volume" role="presentation">
+                    <a class="slds-tabs--default__link slds-text-color_inverse-weak"  onclick="{!c.selectTab}" role="tab" tabindex="1" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Product</a>
+                </li>   
+                
+                <li aura:id="Tab4" class="slds-tabs--default__item slds-text-title--caps" title="Summary" role="presentation">
+                    <a class="slds-tabs--default__link slds-text-color_inverse-weak" onclick="{!c.selectTab}" role="tab" tabindex="2" aria-selected="false" aria-controls="tab-default-4" id="tab-default-4__item">Competitor</a>
+                </li>   
+                <li aura:id="Tab5" class="slds-tabs--default__item slds-text-title--caps" title="Trade Direction Summary" role="presentation">
+                    <a class="slds-tabs--default__link slds-text-color_inverse-weak" onclick="{!c.back}" role="tab" tabindex="3" aria-selected="false" aria-controls="tab-default-5" id="tab-default-5__item">Back</a>
+                </li>                  
+            </ul>
+        </div>
+    
+    <br/>
+    <div class="slds-radio--button-group">
+        <span class="slds-button slds-radio--button" for="All">
+            <input name="radio" type="radio" id="All" checked="true" onclick="{!c.filterRecords}"/>
+            <label class="slds-radio--button__label" for="All">
+                <span class="slds-radio--faux">All Accounts</span>
+            </label>
+        </span>
+
+        <span class="slds-button slds-radio--button" for="My">
+            <input name="radio" type="radio" id="My" onclick="{!c.filterRecords}"/>
+            <label class="slds-radio--button__label" for="My">
+                <span class="slds-radio--faux">Current Account</span>
+            </label>
+        </span>
+    </div>
+    
+ 
+</aura:component>

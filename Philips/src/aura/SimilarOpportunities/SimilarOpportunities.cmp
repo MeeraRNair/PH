@@ -1,0 +1,100 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" access="global"
+                controller="SimilarOpportunitiesController">
+
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="similarOpportunities" type="SimilarOppWrapperClass.DisplaySimilarOpps[]" />
+    <aura:attribute name="searchCriteria" type="String" default="All" />
+    <aura:attribute name="probability" type="List"  />
+    <aura:attribute name="showBool" type="Boolean" default="false"/>
+   <!-- <aura:handler event="force:refreshView" action="{!c.doInit}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> -->
+
+ 
+     <!--  <lightning:card iconName="custom:custom86" title="Similar Opportunities" >
+      <aura:set attribute="actions">
+            <lightning:buttonIcon iconName="utility:back" onclick="{!c.goThere}" alternativeText="Go back"/>
+            
+        </aura:set>
+           <lightning:select name="Filter" label="Filter: " onchange="{!c.filterRecords}" value="{!v.searchCriteria}">
+       			 <option value="All">All Accounts</option>
+        		 <option value="My">Current Account</option>
+    		</lightning:select>-->
+    
+    Product Competitor chart
+    <br/>
+    <c:productprobabilityChart />
+    <br/>
+    <aura:renderIf isTrue="{!v.showBool}">
+     Probability to win and loose depending on products added
+    <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+            <thead>
+                <tr class="slds-text-title--caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Product Code">Code</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Won">Won %</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="lost">LOST %</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        		<aura:iteration items="{!v.probability}" var="prob" indexVar="key">     
+          	<tr>
+             <th scope="row" data-label="Name">
+                            <div class="slds-truncate" title="{! prob.key }">{! prob.key }</div>
+             </th>
+              <aura:iteration items="{!prob.value}" var="val">
+              <td data-label=" Probability">
+				<div>{!val}</div>
+              </td>
+            </aura:iteration>
+            
+            
+          </tr>
+        </aura:iteration>
+      </tbody>
+    </table> 
+    </aura:renderIf>
+    <br/>
+   <lightning:card title="Similar Opportunities">
+
+        <div class="slds-p-left--medium slds-p-right--medium">
+            <ul class="slds-list--vertical slds-has-dividers--top-space">
+                <aura:iteration items="{!v.similarOpportunities}" var="item" indexVar="i">
+                    <li class="slds-list__item">
+                        <div class="slds-media">
+                            <div class="slds-media__body">
+                                <div class="slds-grid" >
+                                    <a data-record="{!item.opp.Id}" onclick="{!c.navToRecord}">
+                                       <h3 class="slds-text-heading--small slds-m-bottom--xx-small">{!item.opp.Name}</h3>
+                                    </a>
+
+                                </div>
+                                <div class="slds-m-top--small">
+             						<ul class="slds-grid slds-wrap">
+                                        <li class="slds-list__item slds-size--1-of-2"> {!item.opp.StageName} </li>
+                                        <li class="slds-list__item slds-size--1-of-2"><ui:outputDate format="MM/DD/YYYY" value="{!item.opp.CloseDate}"/></li>
+                                        <li class="slds-list__item slds-size--1-of-2"> {!item.opp.Reason_for_close__c}  </li>
+
+
+             						</ul>  
+                                    <ul class="slds-grid slds-wrap">
+                                   		<li class="slds-list__item slds-size--1-of-2"> {!item.productCodeList}</li>
+
+                                    </ul>
+                                    
+         						</div>
+                               
+                          
+                            </div>
+                        </div>
+                    </li>
+                </aura:iteration>
+            </ul>
+        </div>
+    </lightning:card>
+
+</aura:component>

@@ -1,0 +1,6 @@
+<apex:page controller="SalesTeamCntrl" action="{!calculatewinningslaesteam}">
+  <!-- Begin Default Content REMOVE THIS -->
+  {!message}
+  This is your new Page: testSrep
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Lightning page header button clicked." >
+	<aura:attribute name="fromScreen" type="String"/>
+</aura:event>

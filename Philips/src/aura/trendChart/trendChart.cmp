@@ -1,0 +1,15 @@
+<aura:component access="global" >
+	<ltng:require scripts="/resource/Chart"/> 
+    <ltng:require scripts="{!$Resource.ChartJS23}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <aura:attribute name="chartData" type="List" />
+    <aura:attribute name="title" type="String" default="Chart"/>
+
+    <aura:handler event="c:ChartEvent" action="{!c.chartChange}"/>
+    
+    <div class="slds-grid slds-wrap slds-grid--pull-padded">
+        <!--div class="slds-text-heading- -small">{!v.title}</div-->
+	    <canvas aura:id="chart" height="250"></canvas>
+    </div>
+    
+</aura:component>

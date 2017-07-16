@@ -1,0 +1,86 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes"  access="global" controller="TrendCntrl">
+   
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="TrendList" type="OpportunityReportResponse[]" />
+    <aura:attribute name="showChart" type="boolean" default="false" />
+    <aura:attribute name="searchCriteria" type="String" default="All" />
+    <aura:attribute name="trendType" type="String" default="Product" />
+        
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:SalesAppHeader pgHeader="Opportunity Trend" icon="utility:trending" showButton="true" Button1="Back"/>
+    
+    <div class="slds-tabs--default ">
+        <ul class="slds-tabs--default__nav" role="tablist">                 
+            <!-- v2.0: Changed tabs -->
+            <li aura:id="Tab1" class="slds-tabs--default__item slds-text-title--caps slds-active" title="Volume" role="presentation">
+                <a class="slds-tabs--default__link slds-text-color_inverse-weak"  onclick="{!c.selectTab}" role="tab" tabindex="1" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Product</a>
+            </li>   
+            
+            <li aura:id="Tab2" class="slds-tabs--default__item slds-text-title--caps" title="Summary" role="presentation">
+                <a class="slds-tabs--default__link slds-text-color_inverse-weak" onclick="{!c.selectTab}" role="tab" tabindex="2" aria-selected="false" aria-controls="tab-default-4" id="tab-default-4__item">Competitor</a>
+            </li> 
+            <li aura:id="Tab3" class="slds-tabs--default__item slds-text-title--caps" title="Summary" role="presentation">
+                <a class="slds-tabs--default__link slds-text-color_inverse-weak" onclick="{!c.selectTab}" role="tab" tabindex="3" aria-selected="false" aria-controls="tab-default-4" id="tab-default-4__item">Trend</a>
+            </li> 
+            <li aura:id="Tab5" class="slds-tabs--default__item slds-text-title--caps" title="Trade Direction Summary" role="presentation">
+                <a class="slds-tabs--default__link slds-text-color_inverse-weak" onclick="{!c.back}" role="tab" tabindex="4" aria-selected="false" aria-controls="tab-default-5" id="tab-default-5__item">Back</a>
+            </li>                  
+        </ul>
+    </div>
+    
+    <br/>
+    <div class="slds-radio--button-group">
+        <span class="slds-button slds-radio--button" for="All">
+            <input name="radio" type="radio" id="All" checked="true" onclick="{!c.filterRecords}"/>
+            <label class="slds-radio--button__label" for="All">
+                <span class="slds-radio--faux">All Accounts</span>
+            </label>
+        </span>
+
+        <span class="slds-button slds-radio--button" for="My">
+            <input name="radio" type="radio" id="My" onclick="{!c.filterRecords}"/>
+            <label class="slds-radio--button__label" for="My">
+                <span class="slds-radio--faux">Current Account</span>
+            </label>
+        </span>
+    </div>
+     <br/><br/>
+    <aura:if isTrue="{!v.showChart == true}">
+    	<c:trendChart chartData="{!v.TrendList}" title="Opportunity Trend"/>
+    </aura:if>
+    
+    <br/>
+    <aura:iteration items="{!v.TrendList}" var="response" indexVar="index">
+        <div class="slds-grid slds-wrap slds-grid--pull-padded">
+            <div class="slds-page-header slds-size--1-of-1">
+                <div class="slds-media">                   
+                    <div class="slds-media__body">
+                        <h2 class="slds-page-header__title slds-truncate slds-align-middle">{!response.product}</h2>
+                        <table>
+                            <tr><th>Stage</th>
+                                <th>Revenue</th>
+                            </tr>
+                            <aura:iteration items="{!response.wcList}" var="wcRec" indexVar="index">
+                                <tr><td>                   
+                                    <div class="slds-form-element slds-hint-parent">                         
+                                        <div class="slds-form-element__control">
+                                            <span class="slds-form-element__static"><ui:outputText value="{!wcRec.stage}"/></span>
+                                        </div>                     
+                                    </div>       
+                                    </td><td>
+                                    <div class="slds-form-element slds-hint-parent">                        
+                                        
+                                        <div class="slds-form-element__control">
+                                            <span class="slds-form-element__static"><ui:outputText value="{!wcRec.sumAmount}"/></span>
+                                        </div>                     
+                                    </div>
+                                    </td></tr>
+                                
+                            </aura:iteration>
+                        </table>                        
+                    </div>
+                </div>
+            </div>
+    	</div>
+    </aura:iteration>         
+</aura:component>

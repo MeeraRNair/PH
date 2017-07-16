@@ -1,0 +1,28 @@
+<aura:component controller="AccountController">
+    <ltng:require styles="/resource/leaflet/leaflet.css"
+        scripts="/resource/leaflet/leaflet.js"
+        afterScriptsLoaded="{!c.jsLoaded}" />
+    <aura:attribute name="map" type="Object"/>
+     <aura:attribute name="distance" type="Decimal" />
+	<aura:handler event="c:AccountsLoaded" action="{!c.accountsLoaded}"/>
+    <div id="myform" class="myform">
+        <form >        
+             <ui:inputText aura:id="distance" label="Distance"
+                            class="slds-input"
+                            labelClass="slds-form-element__label"
+                            value="{!v.distance}"/>
+             
+             <ui:button label="Go" 
+                           class="slds-button slds-button_small"
+                           labelClass="label"
+                           press="{!c.createAccount}"/>
+             <ui:button label="Cancel" 
+                           class="slds-button slds-button_small"
+                           labelClass="label"
+                           press="{!c.Close}"/>
+                             
+        </form>     
+    </div>
+    <div id="map" class="map"></div>
+
+</aura:component>

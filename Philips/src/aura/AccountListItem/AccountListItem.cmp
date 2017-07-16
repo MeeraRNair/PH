@@ -1,0 +1,12 @@
+<aura:component >
+
+    <aura:attribute name="account" type="Account"/>
+
+    <li><a>{!v.account.Name} </a>
+        <!--<a>Revenue : <ui:outputText value="{!v.account.AnnualRevenue}" /></a>
+        <a>Rating : <ui:outputText value="{!v.account.Rating}" /></a>
+        <a>Industry : <ui:outputText value="{!v.account.Industry}" /></a>
+        <a>BillingCity : <ui:outputText value="{!v.account.BillingCity}" /></a>-->
+    </li>
+
+</aura:component>

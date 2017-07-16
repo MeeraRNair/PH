@@ -1,0 +1,40 @@
+<aura:component implements="force:appHostable" controller="AccountController">
+
+    <ltng:require styles="/resource/leaflet/leaflet.css" />    
+    <ltng:require scripts="/resource/leaflet/leaflet.js" afterScriptsLoaded="{!c.jsLoaded}" />
+    <aura:attribute name="distance" type="Decimal" />
+    <aura:attribute name="accounttype" type="String" />
+    <aura:attribute name="acc" type="Account" default="{ 'sobjectType': 'Account'}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="map" type="Object"/>
+    <aura:handler event="c:AccountsLoaded" action="{!c.accountsLoaded}"/>
+    <aura:attribute name="AcTypes" type="String[]" />    
+	<div id="myform" class="myform">
+        <form >        
+             <ui:inputText aura:id="distance" label="Distance"
+                            class="slds-input"
+                            labelClass="slds-form-element__label"
+                            value="{!v.distance}"/>
+            
+            <ui:inputSelect aura:id="type" label="Type" class="slds-input" change="{!c.setaccounttype}"> 
+                <aura:iteration items="{!v.AcTypes}" var="act">
+                    <ui:inputSelectOption text="{!act}" label="{!act}" value="{!act}">
+                    </ui:inputSelectOption>
+                </aura:iteration>
+            </ui:inputSelect>
+             <ui:button label="Go" 
+                           class="slds-button slds-button_small"
+                           labelClass="label"
+                           press="{!c.createAccount}"/>
+             <ui:button label="Cancel" 
+                           class="slds-button slds-button_small"
+                           labelClass="label"
+                           press="{!c.Close}"/>
+                             
+        </form>
+    	
+     </div>    
+	<div class="map" id="map"></div> 
+             
+
+</aura:component>

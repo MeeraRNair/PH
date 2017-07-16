@@ -1,0 +1,24 @@
+<aura:component >
+    <aura:attribute name="pgHeader" type="String" default="test" />
+    <aura:attribute name="icon" type="String" default="custom:custom64" />
+    <aura:attribute name="showButton" type="boolean" default="false" />
+    <aura:attribute name="Button1" type="String" default="New" />
+    <aura:attribute name="fromComp" type="String" default="" />
+    
+    <aura:registerEvent name="headerButtonClick" type="c:HeaderButtonClicked"/>
+    <div class="slds-grid slds-wrap slds-grid--pull-padded">
+        <div class="slds-page-header slds-size--1-of-1">
+            <div class="slds-media">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-opportunity" >
+                        <lightning:icon iconName="{!v.icon}" size="small" alternativeText="Header"/>   
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!v.pgHeader}">{!v.pgHeader}</h1>
+                </div>
+                <lightning:buttonIcon iconName="utility:back" onclick="{!c.back}" alternativeText="Go back"/>
+            </div>
+        </div>
+    </div>
+</aura:component>
