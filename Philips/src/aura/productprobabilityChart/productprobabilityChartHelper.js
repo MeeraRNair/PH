@@ -5,7 +5,21 @@
             return;
         }
         var chartCanvas = component.find("chart").getElement();
+        var recordId = component.get("v.recordId");
         var action = component.get("c.getreport");
+        var colors = [
+            'rgba(23, 48, 91, 1)',
+            'rgba(62, 159, 222, 1)',
+            'rgba(48, 165, 154, 1)',
+            'rgba(132, 220, 214, 1)',
+            'rgba(222, 159, 0, 1)',
+            'rgba(223, 205, 114, 1)'
+        ];
+        
+         action.setParams({
+            "recordId": recordId
+                        
+        });
         action.setCallback(this, function(response) {
             var state = response.getState();
             if (state === "SUCCESS") {
@@ -30,43 +44,30 @@
                         labels: chartLabels,
                         datasets: [
                             {
-                                label: "test",
+                                fill: false,
+                borderWidth: 1.5,
+                backgroundColor: colors[i++],
+                borderColor: colors[i],
+                pointBackgroundColor: "#FFFFFF",
+                pointBorderWidth: 4,
+                pointHoverRadius: 8,
+                pointRadius: 6,
+                pointHitRadius: 10,
                                 data: chartData,
-                                backgroundColor: [
-                                    "#52BE80",
-                                    "#76D7C4",
-                                    "#1E8449",
-                                    "#2ECC71",
-                                    "#FFB74D",
-                                    "#E67E22",
-                                    "#F8C471",
-                                    "#3498DB",
-                                    "#00BCD4",
-                                    "#D32F2F",
-                                    "#82E0AA",
-                                    "#AFB42B"
-                                ]
+                                
+                                
                             }
                         ]
                     },
-                    options: {
-                        cutoutPercentage: 75,
-                        maintainAspectRatio: false,
-                        legend: {
-                            display: true,
-                            position:'right',
-                            fullWidth:false,
-                            reverse:true,
-                            labels: {
-                                fontColor: '#000',
-                                fontSize:10,
-                                fontFamily:"Salesforce Sans, Arial, sans-serif SANS_SERIF"
-                            },
-                            layout: {
-                                padding: 70,
-                            }
-                        }
-                    }
+               options: {
+                responsive: false,
+                legend: { display: false },
+                maintainAspectRatio :true,
+               	scales: {
+                 xAxes: [{ stacked: true }],
+                 yAxes: [{ stacked: true }]
+				}
+                }
                 });
                 
             } else if (state === "ERROR") {

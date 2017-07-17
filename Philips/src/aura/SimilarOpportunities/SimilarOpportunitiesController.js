@@ -2,6 +2,7 @@
     doInit : function(component, event, helper) {
         helper.getsimilaropps(component,'All');
         helper.getProbabilities(component);
+        helper.getProbabilityReason(component);
     },
 
     navToRecord : function (component, event, helper) {

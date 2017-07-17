@@ -2,12 +2,14 @@ public class InsightsResponse {
     
     @AuraEnabled public List<OpportunityReportResponse> chartList {get; set;}
     @AuraEnabled public List<wcDetails> wcDetailList {get; set;}
-    @AuraEnabled public String prediction {get; set;}
+    @AuraEnabled public String prediction1 {get; set;}
+    @AuraEnabled public String prediction2 {get; set;}
     
     public InsightsResponse(){
 		chartList = new List<OpportunityReportResponse>();
         wcDetailList = new List<wcDetails>();
-        prediction = '';
+        prediction1 = '';
+        prediction2 = '';
     }
     
     public void addToDetailList(OpportunityLineItem oli){

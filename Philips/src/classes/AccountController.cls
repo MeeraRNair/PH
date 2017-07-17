@@ -8,20 +8,20 @@ public with sharing class AccountController {
         latParam = comLat;
         longParam = comLong;
     //public static List<Account> findAll(Decimal comLong) {
-    system.debug('##### comLong'+Database.Query('Select Id,Name,BillingLatitude, BillingLongitude,AnnualRevenue,Industry,Rating,BillingCity from Account where Distance(BillingAddress,Geolocation('+comLat+','+comLong+'),\'mi\') < 200 limit 50'));
-    
-    return(Database.Query('Select Id,Name,BillingLatitude, BillingLongitude,AnnualRevenue,Industry,Rating,BillingCity from Account where Distance(BillingAddress,Geolocation('+comLat+','+comLong+'),\'mi\') < 200 limit 50'));
-   
+     
+    //return(Database.Query('Select Id,Name,BillingLatitude, BillingLongitude,AnnualRevenue,Industry,Rating,BillingCity from Account where BillingLatitude != NULL AND BillingLongitude != NULL AND Distance(Location__c,Geolocation('+comLat+','+comLong+'),\'mi\') < 2000 limit 50'));
+     return(Database.Query('Select Id,Name,BillingLatitude, BillingLongitude,AnnualRevenue,Industry,Rating,BillingCity from Account where BillingLatitude != NULL AND BillingLongitude != NULL AND Distance(Location__c,Geolocation(9.77,77.55),\'mi\') < 2000 limit 50'));
+
     }
 
     
     @AuraEnabled
-    public static List<Account> saveAccount (Integer dist,String AType) {
+    public static List<Account> saveAccount (Integer dist) {
     System.debug('Params  '+latParam+'::::'+longParam);
     System.debug('acc  '+dist);
     return [Select id, name, BillingLatitude, BillingLongitude 
             				FROM Account
-            				WHERE Type=: AType AND BillingLatitude != NULL AND BillingLongitude != NULL AND DISTANCE(Location__c, GEOLOCATION(:latParam, :longParam),'mi') <: dist 
+            				WHERE BillingLatitude != NULL AND BillingLongitude != NULL AND DISTANCE(Location__c, GEOLOCATION(:latParam, :longParam),'mi') <: dist 
             				LIMIT 50];
 	
     

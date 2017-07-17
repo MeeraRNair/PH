@@ -9,6 +9,7 @@
         action.setCallback(this, function(response){
             var similarOpportunities = response.getReturnValue();
             component.set("v.similarOpportunities", similarOpportunities);
+            component.set("v.recordId", recordId);
         });
         $A.enqueueAction(action);
     },
@@ -31,6 +32,26 @@
             
             component.set("v.probability", probs);
             component.set("v.showBool", false);
+            }
+        });
+        $A.enqueueAction(action);
+    },
+	
+    getProbabilityReason : function(component){
+    	var recordId = component.get("v.recordId");
+        var action = component.get("c.getProbabilityReason");
+        action.setParams({
+            recordId: recordId,
+        });
+        action.setCallback(this, function(response){
+            
+             var state = response.getState();
+            if (state === "SUCCESS") {                
+                var probs = [];
+                var probabilities = response.getReturnValue();
+                           
+            component.set("v.predictions", probabilities);
+			component.set("v.recordId", recordId);
             }
         });
         $A.enqueueAction(action);

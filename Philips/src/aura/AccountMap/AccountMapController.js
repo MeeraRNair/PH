@@ -34,20 +34,11 @@
 	},
 		
 	   accountsLoaded: function(component, event, helper) {
-
 			// Add markers
 			var map = component.get('v.map');
 			var accounts = event.getParam('accounts');
 			var markerArray = [];
-            var greenIcon = L.icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-
-    iconSize:     [38, 95], // size of the icon
-    shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
+            console.log('$$$$Acc'+accounts);
 			for (var i=0; i<accounts.length; i++) {
 				var account = accounts[i];
 				var latLng = [account.BillingLatitude, account.BillingLongitude ];
@@ -56,7 +47,6 @@
 			    L.marker(latLng, {account: account}).addTo(map).bindPopup(account.Name+"<br/>Industry:"+account.Industry+"<br/>Rating:"+account.Rating+"<br/>AnnualRevenue:"+account.AnnualRevenue+"<br/>Billing City:"+account.BillingCity).on('dblclick', function(event) {
 					helper.navigateToDetailsView(event.target.options.account.Id);
 				});
-  L.marker([9.99,76.5], {icon: greenIcon}).addTo(map);
 
                 
 			}
@@ -65,18 +55,12 @@
 		},
 		
 		accountsLoadedAfterSearch: function(Component, event, helper){
+			var currentLong;
+			var currentLat;
 			// Add markers
 			var map = component.get('v.map');
             var markerArray = [];
-            var greenIcon = L.icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-
-    iconSize:     [38, 95], // size of the icon
-    shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
+			            
 			var accounts = event.getParam('accounts');
 			for (var i=0; i<accounts.length; i++) {
 				var account = accounts[i];
@@ -86,9 +70,7 @@
 					helper.navigateToDetailsView(event.target.options.account.Id);
 				});
 			} 
-                L.marker([9.99,76.5], {icon: greenIcon}).addTo(map);
-
-         
+       
             var group = L.featureGroup(markerArray);
             map.fitBounds(group.getBounds().pad(0.1));
 		}

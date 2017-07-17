@@ -2,8 +2,8 @@
 	scriptsLoaded : function(component, event, helper) {
         
         var colors = [
-            'rgba(23, 48, 91, 1)',
-            'rgba(62, 159, 222, 1)',
+            'rgba(0, 128, 0, 1)',
+            'rgba(255, 0, 0, 1)',
             'rgba(48, 165, 154, 1)',
             'rgba(132, 220, 214, 1)',
             'rgba(222, 159, 0, 1)',
@@ -17,10 +17,12 @@
         var cResponseData = component.get("v.chartData");
        
         for(var i = 0; i <= cResponseData.length - 1; i++){
+            
             labels.push(cResponseData[i].product);
             
             var cWCList = cResponseData[i].wcList;
             for(var j = 0; j <= cWCList.length - 1; j++){
+                console.log(cWCList[j].sumAmount);
                 if (stageRevenueMap[cWCList[j].stage]) {
                 	stageRevenueMap[cWCList[j].stage].push(cWCList[j].sumAmount);    
                 } else {

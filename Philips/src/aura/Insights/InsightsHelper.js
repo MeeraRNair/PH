@@ -3,21 +3,28 @@
     getRecords : function(component, searchType){
         
         var recordId = component.get("v.recordId");
+        //alert(recordId);
+        console.log('trend 1');
+        
         component.set("v.showChart",  false);
-     	if (searchType === undefined)
+     	if (searchType === undefined || searchType === 'All1')
             searchType = 'All';
         
+        console.log('before action');
         var action = component.get("c.getOpportunityProductTrend");        
         action.setParams({
             "opptyId": recordId,
             "searchcriteria":searchType            
         });
-        
+        console.log('after action');
         action.setCallback(this, function(response){
             var state = response.getState();
+            //alert(state);
             if ( state === "SUCCESS"){
-           		component.set("v.TrendList",  response.getReturnValue());
+           		component.set("v.trendResponse",  response.getReturnValue());
                 component.set("v.showChart",  true);
+                console.log('trend....');
+                console.log(response.getReturnValue());
        		}
         });
         $A.enqueueAction(action);
@@ -83,6 +90,27 @@
             
             component.set("v.probability", probs);
             component.set("v.showtable", true);
+            }
+        });
+        $A.enqueueAction(action);
+    },
+    
+    
+     getPredictions : function(component){
+    	var recordId = component.get("v.recordId");
+        var action = component.get("c.getProbabilityReason");
+        action.setParams({
+            recordId: recordId,
+        });
+        action.setCallback(this, function(response){
+            
+             var state = response.getState();
+            if (state === "SUCCESS") {                
+                var probs = [];
+                var probabilities = response.getReturnValue();
+                           
+            component.set("v.predictions", probabilities);
+
             }
         });
         $A.enqueueAction(action);

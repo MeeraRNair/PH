@@ -344,6 +344,13 @@
     </fields>
     <listViews>
         <fullName>AllOpportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>Primary_Competitor__c</columns>
         <filterScope>Everything</filterScope>
         <label>All Opportunities</label>
     </listViews>

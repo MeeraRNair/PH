@@ -29,7 +29,7 @@
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
-        <formula>(ISNEW() || ISCHANGED( BillingLatitude) ||  ISCHANGED(  BillingLongitude )) &amp;&amp; BillingLatitude!=null &amp;&amp;BillingLongitude !=null</formula>
+        <formula>(ISCHANGED( BillingLatitude) ||  ISCHANGED(  BillingLongitude )) &amp;&amp; BillingLatitude!=null &amp;&amp;BillingLongitude !=null</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
 </Workflow>

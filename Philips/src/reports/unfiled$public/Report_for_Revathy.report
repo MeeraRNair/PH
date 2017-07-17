@@ -200,14 +200,6 @@
     <columns>
         <field>BucketField_79824884</field>
     </columns>
-    <filter>
-        <criteriaItems>
-            <column>PRODUCT_CUSTOMER_ID</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>GC1020</value>
-        </criteriaItems>
-    </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>

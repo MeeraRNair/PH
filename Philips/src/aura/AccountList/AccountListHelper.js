@@ -13,7 +13,7 @@
     	});*/
         action.setCallback(this, function(response) {
             var state = response.getState();
-            console.log('@@ state:'+state);
+            console.log('@@ACCOUNTLIST  state:'+state);
             component.set("v.accounts", response.getReturnValue());
             var event = $A.get("e.c:AccountsLoaded");
             event.setParams({"accounts": response.getReturnValue()});

@@ -3,19 +3,20 @@
       
         helper.getsimilaropps(component,'All');
         helper.getProbabilities(component);
+        helper.getPredictions(component);
         //helper.getRecords(component, 'All');
         //console.log('1a');
     },
     
      // check which tab user has selected and if we need to fetch data from heroku
 	selectTab: function(component, event, helper) {
-        
+        console.log('inside select tab');
         var selLink = event.target;
 		var index = selLink.getAttribute("tabindex");
         helper.changeTab(component, index);
         
         if (index == 3){
-           
+           console.log('inside select tab3');
             helper.getRecords(component, component.get("v.searchCriteria"));
         }
         else if (index == 2){
@@ -27,7 +28,7 @@
     },
     
     filterRecords : function(component, event, helper) {
-        
+        console.log('inside fileter records');
         component.set("v.searchCriteria", event.currentTarget.id);
         helper.getRecords(component, event.currentTarget.id);        
     },

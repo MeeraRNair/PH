@@ -1,10 +1,12 @@
 <aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" access="global"
                 controller="SimilarOpportunitiesController">
+    <aura:attribute name="ready" type="Boolean" default="false"/>
+	<aura:attribute name="recordId" type="Id" />
     <ltng:require scripts="/resource/Chart"/> 
 	<ltng:require scripts="{!$Resource.ChartJS23}"
         afterScriptsLoaded="{!c.afterScriptsLoaded}"/>
 
-<aura:attribute name="ready" type="Boolean" default="false"/>
+
 
 <div class="slds-grid slds-wrap slds-grid--pull-padded ">
     <div class="slds-p-horizontal--small slds-size--1-of-3 slds-m-top--medium">
